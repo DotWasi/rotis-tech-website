@@ -5,11 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 const RotisLogo = () => (
     <div className="flex items-center space-x-3">
         <div className="w-12 h-12 flex-shrink-0">
-             <svg viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg" fill="#0ea5e9">
-                <path d="M50,108.42,90,50.08C90,22.46,72.09,0,50,0S10,22.46,10,50.08L50,108.42ZM50,6A44.13,44.13,0,0,1,84.11,47.89c-5.41,21.5-19,39.54-34.11,51.15C34.89,87.43,21.32,69.39,15.89,47.89A44.13,44.13,0,0,1,50,6Z"/>
-                <path d="M70,40H30a2.5,2.5,0,0,1,0-5H70a2.5,2.5,0,0,1,0,5Z"/>
-                <path d="M67.5,35H60V27.5a2.5,2.5,0,0,0-5,0V35H45V27.5a2.5,2.5,0,0,0-5,0V35H32.5a2.5,2.5,0,0,0,0,5H40V55.15A12.5,12.5,0,0,0,50,65a12.5,12.5,0,0,0,10-7.35V40h7.5a2.5,2.5,0,0,0,0-5ZM50,60a7.5,7.5,0,0,1-7.5-7.5,2.5,2.5,0,0,0-5,0A12.5,12.5,0,0,0,50,65a12.5,12.5,0,0,0,12.5-12.5,2.5,2.5,0,0,0-5,0A7.5,7.5,0,0,1,50,60Z"/>
-             </svg>
+            {/* This now points to your local image file */}
+            <img src="/assets/rotis-logo.png" alt="Rotis Tech Logo" />
         </div>
         <div className="text-white">
             <h1 className="text-2xl font-bold">Rotis Tech</h1>
