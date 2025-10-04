@@ -53,6 +53,7 @@ const Contact = () => {
                     <form
                         name="contact"
                         method="POST"
+						action="/#/contact"
                         data-netlify="true"
                         onSubmit={handleSubmit}
                         className="space-y-6"
