@@ -8,6 +8,18 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- 
+      THIS IS THE DUMMY FORM FOR NETLIFY.
+      It is hidden from users but visible to Netlify's build bots.
+      This allows your React form to be detected and processed correctly.
+    -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

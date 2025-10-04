@@ -1,38 +1,13 @@
 // ========================================================================
-// START OF FILE: src/pages/Contact.tsx (CORRECTED AND COMPLETE)
+// START OF FILE: src/pages/Contact.tsx (FINAL VERSION FOR NETLIFY FORMS)
 // ========================================================================
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-    const [statusMessage, setStatusMessage] = useState('');
-
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        setStatus('loading');
-        const formData = new FormData(event.currentTarget);
-
-        try {
-            const response = await fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData as any).toString(),
-            });
-
-            if (response.ok) {
-                setStatusMessage('Thank you for your message! We will get back to you shortly.');
-                setStatus('success');
-                (event.target as HTMLFormElement).reset();
-            } else {
-                throw new Error('Form submission failed');
-            }
-        } catch (error) {
-            setStatusMessage('An error occurred. Please try again later.');
-            setStatus('error');
-        }
-    };
+    // This component is now much simpler as it doesn't need to handle form state with JavaScript.
+    // Netlify handles the submission automatically.
 
     return (
         <div>
@@ -50,16 +25,26 @@ const Contact = () => {
                     className="bg-gray-800/50 p-8 rounded-lg shadow-xl border border-gray-700"
                 >
                     <h2 className="text-3xl font-bold text-brand-secondary mb-6">Send a Message</h2>
+                    
+                    {/* This form is now a standard HTML form that Netlify will detect */}
                     <form
                         name="contact"
                         method="POST"
-						action="/#/contact"
+                        action="/#/contact" // After submission, Netlify will show its success page, then the user can navigate back.
                         data-netlify="true"
-                        onSubmit={handleSubmit}
+                        data-netlify-honeypot="bot-field"
                         className="space-y-6"
                     >
+                        {/* This hidden input is required for Netlify to correctly identify the form */}
                         <input type="hidden" name="form-name" value="contact" />
                         
+                        {/* This is a hidden field for spam protection (honeypot) */}
+                        <p className="hidden">
+                            <label>
+                                Don’t fill this out if you’re human: <input name="bot-field" />
+                            </label>
+                        </p>
+
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-300">Full Name</label>
                             <input type="text" name="name" id="name" required className="mt-1 block w-full bg-gray-900 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-brand-primary focus:border-brand-primary"/>
@@ -73,19 +58,14 @@ const Contact = () => {
                             <textarea name="message" id="message" rows={5} required className="mt-1 block w-full bg-gray-900 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-brand-primary focus:border-brand-primary"></textarea>
                         </div>
                         <div>
-                            <button type="submit" disabled={status === 'loading'} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-primary hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary disabled:bg-gray-500 disabled:cursor-not-allowed">
-                                {status === 'loading' ? 'Sending...' : 'Send Message'}
+                            <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand-primary hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary">
+                                Send Message
                             </button>
                         </div>
-                        {statusMessage && (
-                            <div className={`p-4 rounded-md text-center text-sm ${status === 'success' ? 'bg-green-900/50 border border-green-600 text-green-300' : 'bg-red-900/50 border border-red-600 text-red-300'}`}>
-                                {statusMessage}
-                            </div>
-                        )}
                     </form>
                 </motion.div>
 
-                {/* --- THIS IS THE MISSING RIGHT COLUMN THAT IS NOW RESTORED --- */}
+                {/* Right Column: Details & Map */}
                 <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
